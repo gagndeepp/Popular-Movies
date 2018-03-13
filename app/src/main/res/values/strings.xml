@@ -1,3 +1,24 @@
 <resources>
     <string name="app_name">Popular Movies</string>
+    <string name="network_error_string">Internet not Connected.Please Check Connection and Refresh</string>
+    <string name="url_sortby_popular">popular</string>
+    <string name="url_sortby_top_rated">top_rated</string>
+    <string name="API_KEY">8b992ad30917938aa657183a8a40af98</string>
+    <string name="BASE_URL_KEY">http://api.themoviedb.org/3/movie/</string>
+    <string name="BASE_THUMB_URL">http://image.tmdb.org/t/p/</string>
+    <string name="THUMB_SIZE">w342/</string>
+    <string name="json_string_param_result">results</string>
+    <string name="json_param_title">title</string>
+    <string name="json_param_overview">overview</string>
+    <string name="json_param_vote">vote_average</string>
+    <string name="json_param_release">release_date</string>
+    <string name="json_param_thumb_path">poster_path</string>
+    <string name="intent_extra_movie">movie</string>
+    <string name="menu_item_refresh">Refresh</string>
+    <string name="sort_by_popularity">Sort By Popularity</string>
+    <string name="sort_by_rating">Sort By Rating</string>
+    <string name="detail_activity_rating">Rating :</string>
+    <string name="detail_activoty_release">Release Date:</string>
+    <string name="detail_activoty_movie">Movie Plot:</string>
+    <string name="network_helper_api_key">api_key</string>
 </resources>

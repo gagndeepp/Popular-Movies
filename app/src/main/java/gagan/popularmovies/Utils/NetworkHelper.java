@@ -1,5 +1,6 @@
 package gagan.popularmovies.Utils;
 
+import android.content.Context;
 import android.net.Uri;
 import android.util.Log;
 
@@ -10,85 +11,65 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Scanner;
 
-import static android.content.ContentValues.TAG;
+import gagan.popularmovies.MainActivity;
+import gagan.popularmovies.R;
 
-/**
- * Created by Gagan on 8/28/2017.
- */
-
-public class NetworkHelper {
-
-    private static String BASE_URL_KEY = "https://api.themoviedb.org/3/discover/movie?api_key=8b992ad30917938aa657183a8a40af98";
-    private static String BASE_THUMB_URL = "http://image.tmdb.org/t/p/";
-    private static String THUMB_SIZE = "w342/";
-    private static String PARAM_LANGUAGE = "language";
-    private static String PARAM_REGION = "region";
-    private static String PARAM_SORT = "sort_by";
-    private static String PARAM_YEAR = "primary_release_year";
-
-    public static URL buildURL(Boolean sortBy) {
-
+public class NetworkHelper extends MainActivity {
+    static Context main_context;
+    public static URL buildURL(Boolean sortBy, Context context) {
+        main_context = context;
         URL url = null;
         Uri uri;
-        Uri.Builder builder  = new Uri.Builder();
-        builder = Uri.parse(BASE_URL_KEY).buildUpon()
-                .appendQueryParameter(PARAM_LANGUAGE, "en-US")
-                .appendQueryParameter(PARAM_REGION, "US")
-                .appendQueryParameter(PARAM_YEAR, String.valueOf(2017));
+        Uri.Builder builder = new Uri.Builder();
+        builder = Uri.parse(main_context.getString(R.string.BASE_URL_KEY)).buildUpon();
         if (sortBy)
-            builder.appendQueryParameter(PARAM_SORT, "popularity.desc");
+            builder.appendEncodedPath(main_context.getString(R.string.url_sortby_popular));
         else
-            builder.appendQueryParameter(PARAM_SORT, "vote_average.desc");
+            builder.appendEncodedPath(main_context.getString(R.string.url_sortby_top_rated));
+        builder.appendQueryParameter(main_context.getString(R.string.network_helper_api_key),main_context.getString(R.string.API_KEY));
         uri = builder.build();
+        Log.d("DEBUG",uri.toString());
         try {
             url = new URL(uri.toString());
         } catch (MalformedURLException e) {
             e.printStackTrace();
         }
+
         return url;
     }
 
-    public static String buildImageURL(String end_path){
+    public static String buildImageURL(String end_path) {
         String returnString;
-        Uri uri;
-        StringBuilder builder = new StringBuilder();
-        builder.append(BASE_THUMB_URL)
-                .append(THUMB_SIZE)
-                .append(end_path);
-        returnString = builder.toString();
+        returnString = main_context.getString(R.string.BASE_THUMB_URL) +
+                main_context.getString(R.string.THUMB_SIZE) +
+                end_path;
         return returnString;
     }
 
-    public static String getHTTPData(URL url) throws IOException {
-        HttpURLConnection httpURLConnection = null;
 
+    public static String getHTTPData(URL url) throws IOException {
+        HttpURLConnection httpURLConnection;
         try {
             httpURLConnection = (HttpURLConnection) url.openConnection();
         } catch (IOException e) {
             e.printStackTrace();
-            Log.d(TAG, "getHTTPData: IO EXCEPTION");
             return null;
         }
         if (httpURLConnection.getResponseCode() != HttpURLConnection.HTTP_OK) {
-            Log.e(TAG, "getHTTPData: BAD HTTP CONNECTION");
             return null;
         }
-
         InputStream is = null;
         try {
-            assert httpURLConnection != null;
             is = httpURLConnection.getInputStream();
         } catch (IOException e) {
             e.printStackTrace();
         }
+        assert is != null;
         Scanner scanner = new Scanner(is);
         scanner.useDelimiter("\\A");
         if (scanner.hasNext()) {
             return scanner.next();
         } else
             return null;
-
-
     }
-
 }

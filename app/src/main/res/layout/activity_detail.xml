@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -15,91 +13,86 @@
         android:padding="5dp"
         android:scaleType="centerInside"
         android:src="@drawable/moviedb"
-         />
+        android:visibility="gone" />
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="5dp">
-
-            <ImageView
-                android:id="@+id/movie_thumb_list_imageview"
-                android:layout_width="185dp"
-                android:layout_height="277dp"
-                android:layout_marginRight="2dp"
-                android:scaleType="centerCrop"
-                android:src="@drawable/movie_sample_cover" />
-
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
+                android:layout_height="wrap_content"
+                android:padding="5dp">
 
-                <TextView
-                    android:id="@+id/detail_title_view"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:ellipsize="marquee"
-                    android:gravity="center"
-                    android:padding="10dp"
-                    android:text="PLACEOLDER MOVIE "
-                    android:textColor="@color/colorPrimaryText"
-                    android:textSize="25sp"
-                    android:textStyle="bold" />
+                <ImageView
+                    android:id="@+id/movie_thumb_list_imageview"
+                    android:layout_width="185dp"
+                    android:layout_height="277dp"
+                    android:layout_marginEnd="2dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/movie_sample_cover" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_weight="1"
                     android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/detail_rating_view"
+                        android:id="@+id/detail_title_view"
                         android:layout_width="match_parent"
-                        android:layout_height="0dp"
+                        android:layout_height="match_parent"
                         android:layout_weight="1"
+                        android:ellipsize="marquee"
+                        android:gravity="center"
                         android:padding="10dp"
-                        android:text="PLACEOLDER MOVIE NAME"
                         android:textColor="@color/colorPrimaryText"
-                        android:textSize="20sp"
+                        android:textSize="25sp"
                         android:textStyle="bold" />
 
-                    <TextView
-                        android:id="@+id/detail_releasedate_view"
+                    <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="0dp"
+                        android:layout_height="match_parent"
                         android:layout_weight="1"
-                        android:padding="10dp"
-                        android:text="PLACEOLDER MOVIE NAME"
-                        android:textColor="@color/colorPrimaryText"
-                        android:textSize="20sp"
-                        android:textStyle="bold" />
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/detail_rating_view"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="1"
+                            android:padding="10dp"
+                            android:textColor="@color/colorPrimaryText"
+                            android:textSize="20sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/detail_releasedate_view"
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_weight="1"
+                            android:padding="10dp"
+                            android:textColor="@color/colorPrimaryText"
+                            android:textSize="20sp"
+                            android:textStyle="bold" />
+                    </LinearLayout>
                 </LinearLayout>
-
             </LinearLayout>
 
-        </LinearLayout>
-
-        <TextView
-            android:id="@+id/detail_plot_view"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="10dp"
-            android:paddingLeft="5dp"
-            android:paddingRight="5dp"
-            android:text="PLACEOLDER MOVIE NAME"
-            android:textColor="@color/colorPrimaryText"
-            android:textSize="20sp"
-            android:textStyle="normal" />
+            <TextView
+                android:id="@+id/detail_plot_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                android:textColor="@color/colorPrimaryText"
+                android:textSize="20sp"
+                android:textStyle="normal" />
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

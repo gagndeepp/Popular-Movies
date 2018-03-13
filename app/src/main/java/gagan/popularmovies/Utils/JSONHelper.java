@@ -1,6 +1,6 @@
 package gagan.popularmovies.Utils;
 
-import android.util.Log;
+import android.content.Context;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -9,25 +9,19 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 import gagan.popularmovies.Movie;
+import gagan.popularmovies.R;
 
-import static android.content.ContentValues.TAG;
-
-/**
- * Created by Gagan on 8/29/2017.
- */
 
 public class JSONHelper {
-
-
-    public static ArrayList<Movie> getArrayListFromJSON(String jsonString) throws JSONException {
+    static Context main_context;
+    public static ArrayList<Movie> getArrayListFromJSON(String jsonString,Context context) throws JSONException {
+        main_context = context;
         ArrayList<Movie> returnList = new ArrayList<>();
         JSONObject baseObject = new JSONObject(jsonString);
-        JSONArray resultsArray = null;
-        if (baseObject.has("results")) {
-            resultsArray = baseObject.getJSONArray("results");
-            Log.d(TAG, "getArrayListFromJSON: " + resultsArray.toString());
+        JSONArray resultsArray;
+        if (baseObject.has(main_context.getString(R.string.json_string_param_result))) {
+            resultsArray = baseObject.getJSONArray(main_context.getString(R.string.json_string_param_result));
         } else {
-            Log.d(TAG, "getArrayListFromJSON: Bad Response No Results Array");
             return null;
         }
         for (int i = 0; i < resultsArray.length(); i++) {
@@ -37,15 +31,14 @@ public class JSONHelper {
             String releaseDate;
             String thumbURL;
             JSONObject currentMovie = resultsArray.getJSONObject(i);
-            movieTitle = currentMovie.getString("title");
-            moviePlot = currentMovie.getString("overview");
-            rating = currentMovie.getString("vote_average");
-            releaseDate = currentMovie.getString("release_date");
-            thumbURL = currentMovie.getString("poster_path");
+            movieTitle = currentMovie.getString(main_context.getString(R.string.json_param_title));
+            moviePlot = currentMovie.getString(main_context.getString(R.string.json_param_overview));
+            rating = currentMovie.getString(main_context.getString(R.string.json_param_vote));
+            releaseDate = currentMovie.getString(main_context.getString(R.string.json_param_release));
+            thumbURL = currentMovie.getString(main_context.getString(R.string.json_param_thumb_path));
             Movie movieObject = new Movie(movieTitle, moviePlot, rating, releaseDate, thumbURL);
             returnList.add(movieObject);
         }
-
         return returnList;
     }
 
